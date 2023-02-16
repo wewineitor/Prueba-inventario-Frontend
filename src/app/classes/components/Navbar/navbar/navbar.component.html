@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Agregar medicamento+</button>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['medicaments']">Medicina</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['sales']">Ventas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form autocomplete="off" class="modal-dialog" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Agregar medicamento</h4>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="name" [(ngModel)]="name">
+                    <label data-error="wrong" data-success="right">Nombre</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="laboratory" [(ngModel)]="laboratory">
+                    <label data-error="wrong" data-success="right">Laboratorio</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="date" class="form-control validate" name="manufacturingDate" [(ngModel)]="manufacturingDate">
+                    <label data-error="wrong" data-success="right">	Fecha de fabricacion</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="date" class="form-control validate" name="dueDate" [(ngModel)]="dueDate">
+                    <label data-error="wrong" data-success="right"> Fecha de vencimiento</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="stock" [(ngModel)]="stock">
+                    <label data-error="wrong" data-success="right">Cantidad</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="unitValue" [(ngModel)]="unitValue">
+                    <label data-error="wrong" data-success="right">Valor unitario</label>
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-default">Agregar</button>
+            </div>
+        </div>
+    </form >
+</div>

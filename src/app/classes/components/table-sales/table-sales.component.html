@@ -1,0 +1,26 @@
+<h1 class="text-center">Konex</h1>
+<div *ngIf="sales.length !== 0">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Fecha y hora</th>
+        <th scope="col">Medicamento</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Valor unitario</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of sales">
+        <td>{{ sale.date }}</td>
+        <td>{{ sale.medicament }}</td>
+        <td>{{ sale.amount }}</td>
+        <td>{{ sale.unitValue }}</td>
+        <td>{{ sale.totalValue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="sales.length === 0">
+  <h2>No hay ventas registradas</h2>
+</div>

@@ -1,0 +1,93 @@
+<h1 class="text-center">Konex</h1>
+<div *ngIf="medicaments.length !== 0">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Laboratorio</th>
+        <th scope="col">Fecha de fabricacion</th>
+        <th scope="col">Fecha de vencimiento</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Valor unitario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let medicament of medicaments">
+        <td>{{ medicament.name }}</td>
+        <td>{{ medicament.laboratory }}</td>
+        <td>{{ medicament.manufacturingDate }}</td>
+        <td>{{ medicament.dueDate }}</td>
+        <td>{{ medicament.stock }}</td>
+        <td>{{ medicament.unitValue }}</td>
+        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalSale" (click)="dataToUpdate = medicament">Venta</button></td>
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="nameToUpdate = medicament.name">Actualizar</button></td>
+        <td><button class="btn btn-danger" (click)="deleteMedicament(medicament.name)">Eliminar</button></td>
+
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <form autocomplete="off" class="modal-dialog" #form="ngForm" (ngSubmit)="updateMedicament(medicament.name, form.value)">
+              <div class="modal-content">
+                  <div class="modal-header text-center">
+                      <h4 class="modal-title w-100 font-weight-bold">Modificar medicamento</h4>
+                  </div>
+                  <div class="modal-body mx-3">
+                      <div class="md-form mb-4">
+                          <input type="text" class="form-control validate" name="name" [(ngModel)]="name">
+                          <label data-error="wrong" data-success="right">Nombre</label>
+                      </div>
+        
+                      <div class="md-form mb-4">
+                          <input type="text" class="form-control validate" name="laboratory" [(ngModel)]="laboratory">
+                          <label data-error="wrong" data-success="right">Laboratorio</label>
+                      </div>
+        
+                      <div class="md-form mb-4">
+                          <input type="date" class="form-control validate" name="manufacturingDate" [(ngModel)]="manufacturingDate">
+                          <label data-error="wrong" data-success="right">	Fecha de fabricacion</label>
+                      </div>
+        
+                      <div class="md-form mb-4">
+                          <input type="date" class="form-control validate" name="dueDate" [(ngModel)]="dueDate">
+                          <label data-error="wrong" data-success="right"> Fecha de vencimiento</label>
+                      </div>
+        
+                      <div class="md-form mb-4">
+                          <input type="text" class="form-control validate" name="stock" [(ngModel)]="stock">
+                          <label data-error="wrong" data-success="right">Cantidad</label>
+                      </div>
+        
+                      <div class="md-form mb-4">
+                          <input type="text" class="form-control validate" name="unitValue" [(ngModel)]="unitValue">
+                          <label data-error="wrong" data-success="right">Valor unitario</label>
+                      </div>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                      <button type="submit" class="btn btn-default">Agregar</button>
+                  </div>
+              </div>
+          </form >
+        </div>
+
+        <div class="modal fade" id="modalSale" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Venta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="text" class="form-control validate" placeholder="Cantidad que se vende" name="amount" [(ngModel)]='amount' >
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" *ngIf='amount' (click)="saveSale(medicament)">Crear venta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="medicaments.length === 0">
+  <h2>No hay medicinas registradas</h2>
+</div>
